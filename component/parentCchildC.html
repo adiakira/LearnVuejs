@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+  <mycpn2></mycpn2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpnCtor = Vue.extend({ // child component
+    template:`
+    <div>
+    <h2>title</h2>
+    <p>hahahahaha</p>
+</div>`
+  })
+
+  const cpnCtor2 = Vue.extend({ // parent component
+    template:`
+    <div>
+    <h2>title2</h2>
+    <p>hehhehehehe</p>
+    <mycpn></mycpn>
+</div>`,
+    components:{
+      mycpn:cpnCtor,
+    }
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components:{ // root component
+      // mycpn:cpnCtor,
+      mycpn2:cpnCtor2,
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  {{sum}}
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    // 创建vue时，option可以放哪些东西
+    // el data methods 生命周期函数 计算属性
+    // 插值语法 mustache v-once显示一次，后面不变了
+    // v-html 直接解析传入内容里的html意思
+    // v-text 显示传入内容里的text内容
+    // v-pre 不解析 v-cloak ？？？？
+    //v-bind：src href可以等于一个data变量
+    // class{类型：boolean} 改变boolean可以控制所属class & 数组语法
+    // v-bind绑定style
+    // 计算属性 firstName+lastName， books price加计算
+
+    el: '#app',
+    data: {
+      books: [
+        {id:110, name:'artists book',price:120},
+        {id:111, name:'computer book',price:99},
+        {id:112, name:'information book',price:40}
+      ],
+    },
+    computed:{ //有缓存，不会每次调用都计算一遍（方法）
+      sum(){
+        // return this.books.reduce()
+        // 另外：es6语法需要注意，类似python和java结合体
+        // 在用法里，自带语法糖，不需要传统method后面空argument自带（
+        // 因为用的时候默认使用内部函数getter和setter
+        let result=0;
+        for (let i=0;i<this.books.length;i++){
+          result+=this.books[i].price;
+        }
+        return result
+
+      }
+    }
+  })
+</script>
+</body>
+</html>

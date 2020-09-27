@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  {{fullName}}
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      firstName: 'Harry',
+      lastName:'Potter',
+    },
+    computed:{
+      // fullName(){
+      //   return this.firstName+' '+this.lastName;
+      // }
+      fullName: { //计算属性的完全写法，99%情况不用setter
+        set: function () {
+
+        },
+        get:function () { //只读属性，所以引用没有小括号
+          return this.firstName+' '+this.lastName;
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

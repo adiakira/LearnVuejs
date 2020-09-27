@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <span v-if="userName">{{userType}}<input type="text" placeholder="Name" key="username"></span>
+  <span v-else>{{userType}}<input type="text" placeholder="Email" key="email"></span>
+  <button @click="onClick">Change login type</button>
+  <h2 v-if="isShow">{{message}}</h2>
+  <h2 v-show="isShow">{{message}}</h2>
+<!--  v-show & v-show 区别：在浏览器元素里，v-if如果是false-->
+<!--  它不会在元素里，但是v-show一直都在，只是不显示而已-->
+<!--  再一次v-if为true的时候，再提取出对应标签加载上-->
+<!--  开发的时候，显示和隐藏切换频率很高的时候，使用v-show，否则v-if-->
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      userName: true,
+      userType: 'Name',
+      isShow: false,
+    },
+    methods:{
+      onClick(){
+        // button转换的时候输入过的内容不会被清楚
+        // 比如：已经输入过的用户名在点击按钮时不会消失
+        // vue底层相关，虚拟DOM在渲染浏览器之前会自动复用一些内容
+        // 如果不需要复用，用key属性标记标签，如果key不一样，虚拟DOM渲染的
+        // 时候不会复用key不相同的标签块
+        this.userName=!this.userName;
+        if (this.userName){
+          this.userType = "Name";
+        }
+        else{
+          this.userType = "Email";
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+<!--    在浏览器console试一下-->
+<!--    app.letters.splice(2,2)从第二个元素开始删除两个元素-->
+<!--    app.letters.splice(2,0,'WOw')在第二个元素后面插入新的元素，剩下的往后挪-->
+<!--    <li v-for="item in letters" :key="item">{{item}}</li>-->
+<!--    有key的时候插值会更高效；没有key的时候插值，后面的元素都会向后挪-->
+<!--    有key的时候单单只是在该插值的地方插值，其他的不会挪，有点像数组插值和链表插值的区别-->
+
+<!--    哪些数组操作是响应式的呢？-->
+    <li v-for="item in letters">{{item}}</li>
+    <button @click="btnClick">Button</button>
+
+  </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      letters:['a','b','c','d'],
+    },
+    methods:{
+      btnClick(){
+        // push method, responsive, can push multiple elements
+        // this.letters.push('addition');
+
+        // ATTENTION!! modify element using index number, NOT responsive
+        // this.letters[0]="changed";
+
+        // pop, responsive, delete last element
+        // this.letters.pop();
+
+        // shift, responsive, delete first element,
+        // this.letters.shift();
+
+        // unshift(), responsive, add one/multiple elements at beginning
+        // this.letters.unshift('beginning');
+
+        // splice(从哪开始,删除几个元素)/ splice(1,2,'m','l') 从第1个开始替换元素
+        // this.letters.splice(start,0,'x','y','z') 插入元素，第二个参数为0
+        // responsive
+
+        // sort(), responsive
+
+        // reverse() 逆序 responsive
+        // this.letters.reverse();
+
+        // 修改元素, Vue自带功能
+        Vue.set(this.letters,0,'Wow');
+;      },
+    }
+  })
+</script>
+</body>
+</html>

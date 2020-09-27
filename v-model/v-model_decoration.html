@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  1, decoration:lazy (delay) -->
+  <input type="text" v-model.lazy="message">
+  <h2>{{message}}</h2>
+
+<!--  2, decoration: number-->
+<!--  v-model binding, default type: string?-->
+  <input type="number" v-model.number="age">
+  <h2>{{typeof age}}</h2>
+</div>
+
+<!--3, decoration: trim-->
+  <input type="text" v-model.trim="name">
+  <h2>{{name}}</h2>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      age:"",
+      name:"",
+    }
+  })
+</script>
+</body>
+</html>

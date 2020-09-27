@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  v-if, v-else-->
+<!--  <h2 v-if="isShow">{{message}}</h2>-->
+<!--  <h2 v-else>isShow is false</h2>-->
+
+  <h2>{{result}}</h2>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      isShow: true,
+      score: 50,
+    },
+    computed:{
+      result(){
+        let showMessage='';
+        if (this.score>90){
+          showMessage = 'Excellent'
+        }
+        else if (this.score>80){
+          showMessage = 'Good'
+        }
+        else{
+          showMessage='Annoying'
+        }
+        return showMessage;
+      },
+    },
+    methods:{
+      isMessage(){
+        // can be used in method or data property
+      },
+    }
+  })
+</script>
+</body>
+</html>
