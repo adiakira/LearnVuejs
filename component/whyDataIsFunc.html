@@ -33,6 +33,8 @@
     },
     data(){ //为了保证每回建立一个新的组件，返回的data都是独立的obj
       // 比如，多个counter组件之间的number不会互相影响
+      // 如果在全局定义一个const obj={number:0},data(){return obj}，
+      // 那么所有的counter共用一个obj instance， number值会一样。
       return {
         number: 0,
       }
