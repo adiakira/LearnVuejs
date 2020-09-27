@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--parent component-->
+<div id="app">
+<!--  PAY ATTENTION! v-on listen to child event-->
+  <cpn @itemclick="cpnClick"></cpn>
+</div>
+
+<!--child component-->
+<template id="cpn">
+  <div>
+    <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpn={
+    template:'#cpn',
+    data(){
+      return {
+        categories:[
+          {id:'a', name:'Hot Recommendation'},
+          {id:'b', name:'Digital Devices'},
+          {id:'c', name:'Home Appliance'},
+          {id:'d', name:'Laptops PCs'},
+        ]
+      }
+    },
+    methods:{
+      btnClick(item){
+        // pass customized event from child to parent
+        // PAY ATTENTION! We passed item as argument
+        // But when we use @itemclick="cpnClick" in cpn tag, we don't pass
+        // item as argument, the parent method will automatically take all arguments
+        // below as input arguments
+        this.$emit('itemclick',item)
+      }
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components:{
+      cpn
+    },
+    methods:{
+      cpnClick(item){
+        console.log(item.name)
+      }
+    }
+  })
+</script>
+</body>
+</html>
