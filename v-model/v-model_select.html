@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  choose one v-model single element-->
+  <select name="abc" v-model="fruit">
+    <option value="apple">apple</option>
+    <option value="orange">orange</option>
+    <option value="banana">banana</option>
+    <option value="grape">grape</option>
+  </select>
+  <h2>{{fruit}}</h2>
+
+<!--  mutiple choice v-model array-->
+  <select name="abc" v-model="fruits" multiple>
+    <option value="apple">apple</option>
+    <option value="orange">orange</option>
+    <option value="banana">banana</option>
+    <option value="grape">grape</option>
+  </select>
+  <h2>{{fruits}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      fruit:"banana",
+      fruits:[],
+    }
+  })
+</script>
+</body>
+</html>

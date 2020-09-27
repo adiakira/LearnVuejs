@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2>{{counter}}</h2>
+  <button @click="increment">+</button>
+  <button @click="decrement">-</button>
+
+  <button @click="btnclick0">button0</button>
+  <button @click="btnclick1(abc,$event)">button1</button>
+<!--  $event自动让浏览器读事件对象-->
+
+  <div @click="divclick">
+    <!--  v-on 修饰符  stop -->
+    hahahaha<button @click.stop="btnclick2">button2</button>
+<!--    prevent 修饰符-->
+    <form action="www.baidu.com">
+      <input type="submit" value="submit" @click.prevent="onClick">
+    </form>
+<!--    keyboard hit event-->
+    Name: <input type="text" @keyup.enter="keyhit">
+<!--    self define zujian-->
+<!--    <cpn @click.native="cpnClick">CPN hahahah</cpn>-->
+<!--    once decoration-->
+    <button @click.once="onceClick">button3</button>
+  </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      counter:0,
+      abc:'abc',
+    },
+    methods:{
+      increment(){
+        this.counter++
+      },
+      decrement(){
+        this.counter--;
+      },
+      keyhit(){
+        console.log('keyboard hit!')
+      },
+      onClick(){
+        console.log("submitted!");
+      },
+      onceClick(){
+        console.log('onceClick');
+      },
+      divclick(){
+        console.log('divclick');
+      },
+      btnclick2(){
+        console.log('btnclick2');
+      },
+      btnclick0(event){ // 这里声明了需要一个参数，但是上面call的时候
+        // 没有传参，vue默认将浏览器生产的event事件对象作为参数传入方法
+        // 比如 mouseEvent
+        console.log('btnclick0',event);
+      },
+      btnclick1(abc,event){
+        console.log('btnclick1',abc,event)
+      }
+    }
+  })
+</script>
+</body>
+</html>

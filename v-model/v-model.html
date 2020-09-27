@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  对话框内容更改，后面message也更改-->
+<!--  <input type="text" v-model="message">-->
+<!--  {{message}}-->
+
+  <!-- 或者  v-bind语法糖 冒号：-->
+<!--  <input type="text" :value="message" @input="valueChange">-->
+  <input type="text" :value="message" @input="message=$event.target.value">
+  <h2>{{message}}</h2>
+
+<!--  radio when submit form, if they got same name, get one of them -->
+  <label for="male">
+    <input type="radio" id="male" value="male" v-model="gender">male
+  </label>
+  <label for="female">
+    <input type="radio" id="female" value="female" v-model="gender">female
+  </label>
+
+<!--  checkbox single choice v-model: boolean -->
+  <label for="license">
+    <input type="checkbox" id="license" v-model="isAgree">Agree
+    <h2>{{isAgree}}</h2>
+    <button :disabled="!isAgree">Next</button>
+  </label>
+
+<!--  checkbox multiple choice v-model:array -->
+
+  <input type="checkbox" value="basketball" v-model="hobbies">basketball
+  <input type="checkbox" value="football" v-model="hobbies">football
+  <input type="checkbox" value="volleyball" v-model="hobbies">volleyball
+  <input type="checkbox" value="swimming" v-model="hobbies">swimming
+  <h2>Your hobbies: {{hobbies}}</h2>
+
+<!--  dynamic binding value, use : to bind dynamic values come from our browser-->
+  <label v-for="item in originHobbies" :for="item">
+    <input type="checkbox" :id="item" :value="item" v-model="hobbies">{{item}}
+  </label>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+  // v-model 双向绑定 如果界面改了 变量也改了 绑定变量的东西也变了
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      gender:"",
+      isAgree:false,
+      hobbies:[],
+      originHobbies:["basketball","football","volleyball"]
+    },
+    methods:{
+      valueChange(event){
+        // 每个event发生的时候都会生成一个事件event，对事件进行操作即可
+        // v-model实现了两种功能，:value="message" 把input框内的内容绑成了message
+        // message变化的时候框内容就变了
+        // 如何让框内容变化的时候message也变呢？监听input框内的event，框内变化message
+        // 就变化。event.target返回哪个哪个DOM元素触发了事件
+        this.message = event.target.value;
+      }
+    }
+  })
+</script>
+</body>
+</html>

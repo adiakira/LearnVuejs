@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <mycpn></mycpn>
+</div>
+
+<div id="app2">
+  <mycpn></mycpn>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpnCtor = Vue.extend({
+    template:`
+    <div>
+    <h2>title</h2>
+    <p>hahahahaha</p>
+</div>`
+  })
+
+  // global component, can be used in multiple Vue instances.
+  // Vue.component('mycpn',cpnCtor)
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components:{
+      // local component, can be used only in current Vue instance.
+      mycpn: cpnCtor
+    },
+  })
+
+  const app2 = new Vue({
+    el: '#app2'
+  })
+</script>
+</body>
+</html>

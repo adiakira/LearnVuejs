@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+</head>
+<body>
+<div id="app">
+  <input type="button" value="导入" id="fileImport" @click="clickLoad" style="background: green; height: 80px; width: 100px; font-size: 28px;">
+  <input type="file" id="files" ref="refFile" @change="fileLoad">
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods: {
+      clickLoad() {
+        // 下面三种方法实现效果一样
+        //方法一: 原生html
+        // document.getElementById('files').click();
+        // 方法二: jquery实现
+        // $("#files").click();
+        //方法三:Vue实现
+        this.$refs.refFile.dispatchEvent(new MouseEvent('click'))
+      },
+      fileLoad() {
+        //获取读取的文件File对象 下面两种方法实现效果一样
+        //方法一:原生html获取
+        // const selectedFile = document.getElementById('files').files[0];
+        //方法二:Vue实现
+        const selectedFile = this.$refs.refFile.files[0];
+
+        var reader = new FileReader();
+        reader.readAsText(selectedFile);
+        reader.onload = function() {
+          console.log(this.result);
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

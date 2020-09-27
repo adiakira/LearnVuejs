@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active{
+      color: red;
+    }
+    .line{
+      color: aqua;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <li v-for="(item,index) in movies" @click="chosenOne" :class="{active:isActive}">{{item}}</li>
+  </ul>
+<!--  <img v-bind:src="imgURL" alt="">-->
+<!--  <a v-bind:href="linkURL">baidu</a>-->
+
+<!--  <img :src="imgURL" alt="">  &lt;!&ndash;语法糖写法&ndash;&gt;-->
+<!--  <a :href="linkURL">baidu</a>-->
+  <h2 v-bind:class="getClasses()">Nice</h2>
+  <button @click="changeColor">Change</button>
+  <h2 :class="['active','line']">{{message}}</h2> <!--不常见-->
+</div>
+
+<script src="../js/vue.js"></script>
+<script> // 绑定属性 动态绑定 v-bind 基本内容
+// v-bind 动态绑定class
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      movies:['wonder woman','HP','LOR','Naruto'],
+      linkURL: "http://www.baidu.com",
+      isActive: false,
+      isLine: false,
+      imgURL: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600400355747&di=48625ac383ce2b4210c83cc4219b3405&imgtype=0&src=http%3A%2F%2Fbxcontent.test.upcdn.net%2F1392fd70e234e363c160d9ffd8fc927c.jpg"
+    },
+    methods:{
+      changeColor(){
+        this.isActive = !this.isActive;
+      },
+      chosenOne(){
+
+      },
+      getClasses(){ //动态绑定 对象语法，写道function里面
+
+        return {active:this.isActive, line:this.isLine}
+      },
+    }
+  })
+</script>
+
+</body>
+</html>
