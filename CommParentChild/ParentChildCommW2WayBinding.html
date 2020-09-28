@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn :number1="num1" :number2="num2" @num1change="num1change"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+<!--    Here we try to modify child props directly,-->
+<!--    but we should modify child props through changing parent data-->
+    <h2>props: {{number1}}</h2>
+    <h2>data: {{dnumber1}}</h2>
+<!--    v-model only realize mutual binding inside child component, but it-->
+<!--    doesn't change parent data-->
+<!--    <input type="text" v-model="dnumber1">-->
+<!--    Here we try to change parent data by changing child data, aka, mutual binding-->
+<!--    between parent and child-->
+    <input type="text" :value="dnumber1" @input="num1Input">
+
+    <h2>props: {{number2}}</h2>
+    <h2>data: {{dnumber2}}</h2>
+    <input type="text" v-model="dnumber2">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      num1:1,
+      num2:2,
+    },
+    methods:{
+      num1change(value){
+        this.num1=parseInt(value);
+      }
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        props:{
+          // Parent TO Child, pass by props
+          number1:Number,
+          number2:Number,
+        },
+        data(){
+          return {
+            dnumber1:this.number1,
+            dnumber2:this.number2,
+          }
+        },
+        methods:{
+          num1Input(event){
+            this.dnumber1=event.target.value;
+            this.$emit('num1change',this.dnumber1)
+          },
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
