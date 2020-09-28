@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--  pass parent props to child-->
+<!--  v-bind doesn't support camel naming, eg:myCpn, IF we used camel naming, write my-cpn during binding-->
+  <cpn :cmovies="movies" :cmessage="message" :cinfo="info"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <!--  pass parent props to child-->
+    <p>{{ cmovies }}</p>
+    <h2>{{ cmessage }}</h2>
+    <h2>{{cinfo}}</h2>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  // pass from parent to child: PASS props
+  const cpn = {
+    template: '#cpn',
+    // how to write props: 1, array 2,obj 3,name and obj
+    // 1,
+    // props: ['cmovies', 'cmessage'], // pass parent props to child
+    // 2,
+    // props:{
+    //   cmovies: Array,
+    //   cmessage:String,
+    // }
+    // 3,
+    props:{
+      cmessage:{
+        type: String,
+        default:'aaa',
+        required:true, // Have to pass cmessage through parent tag properties
+      },
+      cmovies:{
+        type:Array,
+        default: [],
+      },
+      cinfo: {
+        type:Object,
+        default(){
+          return {}
+        },
+      },
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      movies: ['HP', "Matrix", "Inception", "Iron Man"],
+      info:{
+        name:"Evie",
+        height:1.68,
+        address: "c2",
+      },
+    },
+    components: { //cpn is child component
+      cpn
+    }
+  })
+</script>
+</body>
+</html>
