@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn></cpn>
+  <cpn><span>hahhaah</span></cpn>
+  <cpn><i>heheheh</i></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>I'm a component</h2>
+    <p>Component, hhhhhh</p>
+<!--    If we put tags inside slot tag, it means by default we'll have this tag element-->
+<!--    even if we don't put slot implementation inside <cpn></cpn> tag above.-->
+    <slot><button>button</button></slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  // Slot, makes components extendable
+  // Same part: use component; Different part: use slot
+  // 1, Define slot inside templates
+  // 2, put default elements inside slot if we want
+  // 3, If there are multiple elements inside cpn tag, replace default with all the customized elements
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+      }
+    }
+  })
+</script>
+</body>
+</html>
