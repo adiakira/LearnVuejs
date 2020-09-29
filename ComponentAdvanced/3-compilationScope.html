@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  Here isShow checks the root Vue object's data and properties-->
+<!--  Because here cpn is just a plain tag-->
+  <cpn v-show="isShow"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>Component</h2>
+<!--    Here isShow checks the component's data or properties, compilation scope-->
+    <p v-show="isShow">Content</p>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  // parent's properties works in parent scope
+  // children's properties works in parent scope
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      isShow:true,
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return {
+            isShow:false,
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

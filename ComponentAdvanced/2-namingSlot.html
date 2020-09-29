@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  If we set name property when defining slots,-->
+<!--  Vue won't replace tags inside cpn to customized tags if that slot-->
+<!--  has a name-->
+  <cpn><span>Title</span></cpn>
+
+<!--  If we do wanna change a specific slot part, use his name-->
+  <cpn><button slot="middle">Middle Button</button></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <slot name="left"><span>Left</span></slot>
+    <slot name="middle"><span>Middle</span></slot>
+    <slot name="right"><span>Right</span></slot>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+      }
+    }
+  })
+</script>
+</body>
+</html>
