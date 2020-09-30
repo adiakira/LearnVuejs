@@ -1,0 +1,14 @@
+{
+  "name": "webpack_intro",
+  "version": "1.0.0",
+  "description": "test how to generate config json file, to package main.js quicker",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evie",
+  "devDependencies": {
+    "webpack": "^3.6.0"
+  }
+}
